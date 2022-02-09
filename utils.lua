@@ -37,19 +37,7 @@ local PLAYER_STATES = {
     ['Moving'] = 'move',
 }
 
-local utils = {}
-
----contains
----@param t void
----@param index number
-function utils:contains(t, index)
-    for i, v in pairs(t) do
-        if v == index then
-            return true, i
-        end
-    end
-    return false, -1
-end
+local utils = { }
 
 utils.HITBOX = {
     ['Generic'] = 0,
@@ -63,21 +51,34 @@ utils.HITBOX = {
     ['Right Leg'] = 8,
 }
 
----vectorize
+---Checks if a value is in a table
+---@param t void
+---@param index number
+---@return boolean, number
+function utils:contains(t, index)
+    for i, v in pairs(t) do
+        if v == index then
+            return true, i
+        end
+    end
+    return false, -1
+end
+
+---Converts a table to a vector
 ---@param table table
 ---@return Vector
 function utils:vectorize(table)
     return vector(table[1], table[2], table[3])
 end
 
----eye_pos
+---Gets eye position
 ---@param ent number
 ---@return Vector
 function utils:eye_pos(ent)
     return ent == entity.get_local_player(ent) and self:vectorize({ client.eye_position() }) or self:vectorize({ entity.hitbox_position(ent, self.HITBOX.Head) })
 end
 
----extrapolate
+---Extrapolates player position
 ---@param ent1 number
 ---@param ent2 number
 ---@param hb number
@@ -93,23 +94,22 @@ function utils:extrapolate(ent, ticks)
     return extrapolated_pos
 end
 
+---Gets distance between two entities
 ---@param ent1 number
 ---@param ent2 number
 ---@return number
 function utils:ent_dist(ent1, ent2)
-    local pos1 = { entity.get_origin(ent1) }
-    pos1 = vector(pos1[1], pos1[2], pos1[3])
-
-    local pos2 = { entity.get_origin(ent2) }
-    pos2 = vector(pos2[1], pos2[2], pos2[3])
+    local pos1 = self:vectorize({ entity.get_origin(ent1) })
+    local pos2 = self:vectorize({ entity.get_origin(ent2) })
 
     return pos1:dist(pos2)
 end
 
----get_damage
+---Gets predicted bullet damage
 ---@param shooter number
 ---@param victim number
 ---@param hb number
+---@param ticks number
 ---@return number
 function utils:get_damage(shooter, victim, hb, ticks)
     local eye_pos = self:eye_pos(ent1)
@@ -125,7 +125,7 @@ function utils:get_damage(shooter, victim, hb, ticks)
     return damage
 end
 
----is_crouching
+---Checks if an entity is crouching
 ---@param ent number
 ---@return boolean
 function utils:is_crouching(ent)
@@ -134,7 +134,7 @@ function utils:is_crouching(ent)
     return bit.band(flags, 4) == 4
 end
 
----is_in_air
+---Check if an entity is in air
 ---@param ent number
 ---@return boolean
 function utils:is_in_air(ent)
@@ -143,7 +143,7 @@ function utils:is_in_air(ent)
     return bit.band(flags, 1) ~= 1
 end
 
----get_velocity
+---Gets an entity's velocity
 ---@param ent number
 ---@return number
 function utils:get_velocity(ent)
@@ -152,7 +152,7 @@ function utils:get_velocity(ent)
     return math.sqrt(vel[1]^2 + vel[2]^2)
 end
 
----get_pstate
+---Gets an entity's current movement state
 ---@param ent number
 ---@return string
 function utils:get_pstate(ent)
@@ -173,7 +173,7 @@ function utils:get_pstate(ent)
     end
 end
 
----is_throwable
+---Check if a weapon is a throwable
 ---@param ent number
 ---@return boolean
 function utils:is_throwable(ent)
@@ -182,7 +182,7 @@ function utils:is_throwable(ent)
     return self:contains(THROWABLES, classname)
 end
 
----get_max_speed
+---Get maximum player speed
 ---@param ent number
 ---@param wpn number
 ---@return number
@@ -208,7 +208,7 @@ function utils:get_max_speed(ent, wpn)
     return data.max_player_speed
 end
 
----multicolored_text
+---Renders a multicolored string
 ---@param x number
 ---@param y number
 ---@param flags string
@@ -238,6 +238,30 @@ function utils:multicolored_text(x, y, flags, centered, spacing, data)
         renderer.text(cur_x, y, clr[1], clr[2], clr[3], clr[4], flags, nil, text)
 
         used_width = used_width + text_width + spacing
+    end
+end
+
+---Animates from 0 to 1 to 0
+---@param speed number
+---@return number
+function utils:anim_speed(speed)
+    return math.sin(math.abs(-math.pi + (globals.curtime() * speed) % (math.pi * 2)))
+end
+
+---Sets the visibility of all the elements in a table
+---@param table table
+---@param visible boolean
+---@return void
+function utils:table_visible(table, visible)
+    for k in pairs(table) do
+        local reference = table[k]
+        if type(reference) == 'table' then
+            for j in pairs(reference) do
+                ui.set_visible(reference[j], hide)
+            end
+        else
+            ui.set_visible(reference, hide)
+        end
     end
 end
 
