@@ -79,13 +79,13 @@ function utils:eye_pos(ent)
 end
 
 ---Extrapolates player position
----@param ent1 number
----@param ent2 number
----@param hb number
+---@param ent number
+---@param ticks number
 ---@return Vector
 function utils:extrapolate(ent, ticks)
     local m_vecVelocity = self:vectorize({ entity.get_prop(ent, 'm_vecVelocity') })
     local extrapolated_pos = m_vecVelocity
+
 
     for i = 0, ticks do
         extrapolated_pos = extrapolated_pos + (m_vecVelocity * globals.tickinterval())
@@ -147,9 +147,9 @@ end
 ---@param ent number
 ---@return number
 function utils:get_velocity(ent)
-    local vel = entity.get_prop(ent, 'm_vecVelocity')
+    local vel = self:vectorize({ entity.get_prop(ent, 'm_vecVelocity') })
 
-    return math.sqrt(vel[1]^2 + vel[2]^2)
+    return math.sqrt(vel.x^2 + vel.y^2)
 end
 
 ---Gets an entity's current movement state
@@ -244,7 +244,7 @@ end
 ---Animates from 0 to 1 to 0
 ---@param speed number
 ---@return number
-function utils:anim_speed(speed)
+function utils:anim(speed)
     return math.sin(math.abs(-math.pi + (globals.curtime() * speed) % (math.pi * 2)))
 end
 
