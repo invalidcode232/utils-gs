@@ -1,0 +1,518 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>ldoc</h1>
+
+
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><strong>utils</strong></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>utils</code></h1>
+<p>Checks if a value is in a table</p>
+<p></p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#vectorize">vectorize (table)</a></td>
+	<td class="summary">Converts a table to a vector</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#eye_pos">eye_pos (ent)</a></td>
+	<td class="summary">Gets eye position</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#extrapolate">extrapolate (ent1, ent2, hb)</a></td>
+	<td class="summary">Extrapolates player position</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ent_dist">ent_dist (ent1, ent2)</a></td>
+	<td class="summary">Gets distance between two entities</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#get_damage">get_damage (shooter, victim, hb, ticks)</a></td>
+	<td class="summary">Gets predicted bullet damage</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#is_crouching">is_crouching (ent)</a></td>
+	<td class="summary">Checks if an entity is crouching</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#is_in_air">is_in_air (ent)</a></td>
+	<td class="summary">Check if an entity is in air</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#get_velocity">get_velocity (ent)</a></td>
+	<td class="summary">Gets an entity's velocity</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#get_pstate">get_pstate (ent)</a></td>
+	<td class="summary">Gets an entity's current movement state</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#is_throwable">is_throwable (ent)</a></td>
+	<td class="summary">Check if a weapon is a throwable</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#get_max_speed">get_max_speed (ent, wpn)</a></td>
+	<td class="summary">Get maximum player speed</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#multicolored_text">multicolored_text (x, y, flags, centered, spacing, data)</a></td>
+	<td class="summary">Renders a multicolored string</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#anim_speed">anim_speed (speed)</a></td>
+	<td class="summary">Animates from 0 to 1 to 0</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#table_visible">table_visible (table, visible)</a></td>
+	<td class="summary">Sets the visibility of all the elements in a table</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "vectorize"></a>
+    <strong>vectorize (table)</strong>
+    </dt>
+    <dd>
+    Converts a table to a vector
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">table</span>
+         table
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Vector
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "eye_pos"></a>
+    <strong>eye_pos (ent)</strong>
+    </dt>
+    <dd>
+    Gets eye position
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">ent</span>
+         number
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Vector
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "extrapolate"></a>
+    <strong>extrapolate (ent1, ent2, hb)</strong>
+    </dt>
+    <dd>
+    Extrapolates player position
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">ent1</span>
+         number
+        </li>
+        <li><span class="parameter">ent2</span>
+         number
+        </li>
+        <li><span class="parameter">hb</span>
+         number
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Vector
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ent_dist"></a>
+    <strong>ent_dist (ent1, ent2)</strong>
+    </dt>
+    <dd>
+    Gets distance between two entities
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">ent1</span>
+         number
+        </li>
+        <li><span class="parameter">ent2</span>
+         number
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        number
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "get_damage"></a>
+    <strong>get_damage (shooter, victim, hb, ticks)</strong>
+    </dt>
+    <dd>
+    Gets predicted bullet damage
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">shooter</span>
+         number
+        </li>
+        <li><span class="parameter">victim</span>
+         number
+        </li>
+        <li><span class="parameter">hb</span>
+         number
+        </li>
+        <li><span class="parameter">ticks</span>
+         number
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        number
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "is_crouching"></a>
+    <strong>is_crouching (ent)</strong>
+    </dt>
+    <dd>
+    Checks if an entity is crouching
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">ent</span>
+         number
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "is_in_air"></a>
+    <strong>is_in_air (ent)</strong>
+    </dt>
+    <dd>
+    Check if an entity is in air
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">ent</span>
+         number
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "get_velocity"></a>
+    <strong>get_velocity (ent)</strong>
+    </dt>
+    <dd>
+    Gets an entity's velocity
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">ent</span>
+         number
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        number
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "get_pstate"></a>
+    <strong>get_pstate (ent)</strong>
+    </dt>
+    <dd>
+    Gets an entity's current movement state
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">ent</span>
+         number
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        string
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "is_throwable"></a>
+    <strong>is_throwable (ent)</strong>
+    </dt>
+    <dd>
+    Check if a weapon is a throwable
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">ent</span>
+         number
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "get_max_speed"></a>
+    <strong>get_max_speed (ent, wpn)</strong>
+    </dt>
+    <dd>
+    Get maximum player speed
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">ent</span>
+         number
+        </li>
+        <li><span class="parameter">wpn</span>
+         number
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        number
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "multicolored_text"></a>
+    <strong>multicolored_text (x, y, flags, centered, spacing, data)</strong>
+    </dt>
+    <dd>
+    Renders a multicolored string
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">x</span>
+         number
+        </li>
+        <li><span class="parameter">y</span>
+         number
+        </li>
+        <li><span class="parameter">flags</span>
+         string
+        </li>
+        <li><span class="parameter">centered</span>
+         boolean
+        </li>
+        <li><span class="parameter">spacing</span>
+         number
+        </li>
+        <li><span class="parameter">data</span>
+         table
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        void
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "anim_speed"></a>
+    <strong>anim_speed (speed)</strong>
+    </dt>
+    <dd>
+    Animates from 0 to 1 to 0
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">speed</span>
+         number
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        number
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "table_visible"></a>
+    <strong>table_visible (table, visible)</strong>
+    </dt>
+    <dd>
+    Sets the visibility of all the elements in a table
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">table</span>
+         table
+        </li>
+        <li><span class="parameter">visible</span>
+         boolean
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        void
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2022-02-09 07:38:33 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
