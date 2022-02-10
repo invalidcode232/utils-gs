@@ -8,14 +8,9 @@
 -- Dependencies
 local vector = require 'vector'
 
-local found, ref = pcall(require, 'gamesense/ref_lib')
+local found, http = pcall(require, 'gamesense/http')
 if not found then
-    error('ref_lib not found')
-end
-
-local found, csgo_weapons = pcall(require, 'gamesense/csgo_weapons')
-if not found then
-    error('csgo_weapons not found')
+    error('gamesense/http not found')
 end
 
 local utils = { }
@@ -24,6 +19,40 @@ utils.enums = { }
 utils.misc = { }
 utils.entity = { }
 utils.renderer = { }
+
+---Checks if a dependency is installed
+---@param dependency string
+---@param message string
+---@param download_url string
+---@return void
+utils.misc.dependency = function (dependency, message, download_url)
+    local found, lib = pcall(require, dependency)
+
+    if not found then
+        if download_url then
+            print(error)
+            print('Downloading ' .. dependency .. '...')
+
+            http.get(download_url, function (success, response)
+                if not success or response.status ~= 200 then
+                    error('Failed to download ' .. dependency .. '!')
+                    return
+                end
+
+                writefile(dependency .. '.lua', response.body)
+                print('Successfully downloaded ' .. dependency .. '.lua')
+            end)
+        else
+            error(message)
+        end
+    end
+end
+
+utils.misc.dependency('gamesense/csgo_weapons', 'gamesense/csgo_weapons not found, please subscribe at https://gamesense.pub/forums/viewtopic.php?id=18807')
+utils.misc.dependency('ref_lib', 'ref_lib not found, downloading now.. (This might take a while)', 'https://raw.githubusercontent.com/invalidcode232/gamesense-lua/main/gamesense/ref_lib.lua')
+
+local csgo_weapons = require('gamesense/csgo_weapons')
+local ref = require('ref_lib')
 
 -- List of throwable classnames
 local THROWABLES = {
@@ -37,11 +66,11 @@ local THROWABLES = {
 
 -- Player state strings for get_pstate
 utils.enums.PLAYER_STATES = {
-    ['Standing'] = 'stand',
-    ['Crouching'] = 'crouch',
-    ['Slowwalk'] = 'slow',
-    ['Air'] = 'air',
-    ['Moving'] = 'move',
+    'stand',
+    'crouch',
+    'slow',
+    'air',
+    'move',
 }
 
 utils.enums.HITBOX = {
@@ -165,17 +194,41 @@ utils.entity.get_pstate = function (ent)
     local state = 'stand'
 
     if utils.entity.is_crouching(ent) then
-        state = utils.enums.PLAYER_STATES['Crouching']
+        state = 'crouch'
     elseif utils.entity.is_in_air(ent) then
-        state = utils.enums.PLAYER_STATES['Air']
+        state = 'air'
     elseif velocity > 0.1 then
-        state = utils.enums.PLAYER_STATES['Moving']
+        state = 'move'
     elseif (ui.get(ref.antiaim_other.slow_motion[1]) and ui.get(ref.antiaim_other.slow_motion[2])) then
-        state = utils.enums.PLAYER_STATES['Slowwalk']
+        state = 'slow'
     else
-        state = utils.enums.PLAYER_STATES['Standing']
+        state = 'stand'
     end
 end
+
+utils.misc.table_values = function (t)
+    local values = {}
+
+    for k, v in pairs(t) do
+        if type(v) == 'table' then
+            for i, v2 in pairs(v) do
+                table.insert(values, v2)
+            end
+        else
+            table.insert(values, v)
+        end
+    end
+
+    return values
+end
+
+--[[
+    'stand',
+    'crouch',
+    'slow',
+    'air',
+    'move',
+]]--
 
 ---Check if a weapon is a throwable
 ---@param ent number
@@ -256,15 +309,12 @@ end
 ---@param table table
 ---@param visible boolean
 ---@return void
-utils.misc.table_visible = function (table, visible)
-    for k in pairs(table) do
-        local reference = table[k]
-        if type(reference) == 'table' then
-            for j in pairs(reference) do
-                ui.set_visible(reference[j], visible)
-            end
-        else
-            ui.set_visible(reference, visible)
+utils.misc.table_visible = function (table, visible, include_children)
+    for k, v in pairs(table) do
+        if type(v) == 'table' and include_children then
+            utils.misc.table_visible(v, visible)
+        elseif type(v) ~= 'table' then
+            ui.set_visible(v, visible)
         end
     end
 end

@@ -36,14 +36,14 @@
 
 <h2>Modules</h2>
 <ul class="nowrap">
-  <li><strong>utils</strong></li>
+  <li><strong>utils2</strong></li>
 </ul>
 
 </div>
 
 <div id="content">
 
-<h1>Module <code>utils</code></h1>
+<h1>Module <code>utils2</code></h1>
 <p>Checks if a value is in a table</p>
 <p></p>
 
@@ -51,59 +51,59 @@
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#vectorize">vectorize (table)</a></td>
+	<td class="name" nowrap><a href="#utils.misc.vectorize">utils.misc.vectorize (table)</a></td>
 	<td class="summary">Converts a table to a vector</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#eye_pos">eye_pos (ent)</a></td>
+	<td class="name" nowrap><a href="#utils.entity.eye_pos">utils.entity.eye_pos (ent)</a></td>
 	<td class="summary">Gets eye position</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#extrapolate">extrapolate (ent, ticks)</a></td>
+	<td class="name" nowrap><a href="#utils.entity.extrapolate">utils.entity.extrapolate (ent, ticks)</a></td>
 	<td class="summary">Extrapolates player position</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#ent_dist">ent_dist (ent1, ent2)</a></td>
+	<td class="name" nowrap><a href="#utils.entity.ent_dist">utils.entity.ent_dist (ent1, ent2)</a></td>
 	<td class="summary">Gets distance between two entities</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#get_damage">get_damage (shooter, victim, hb, ticks)</a></td>
+	<td class="name" nowrap><a href="#utils.entity.get_damage">utils.entity.get_damage (shooter, victim, hb, ticks)</a></td>
 	<td class="summary">Gets predicted bullet damage</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#is_crouching">is_crouching (ent)</a></td>
+	<td class="name" nowrap><a href="#utils.entity.is_crouching">utils.entity.is_crouching (ent)</a></td>
 	<td class="summary">Checks if an entity is crouching</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#is_in_air">is_in_air (ent)</a></td>
+	<td class="name" nowrap><a href="#utils.entity.is_in_air">utils.entity.is_in_air (ent)</a></td>
 	<td class="summary">Check if an entity is in air</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#get_velocity">get_velocity (ent)</a></td>
+	<td class="name" nowrap><a href="#utils.entity.get_velocity">utils.entity.get_velocity (ent)</a></td>
 	<td class="summary">Gets an entity's velocity</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#get_pstate">get_pstate (ent)</a></td>
+	<td class="name" nowrap><a href="#utils.entity.get_pstate">utils.entity.get_pstate (ent)</a></td>
 	<td class="summary">Gets an entity's current movement state</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#is_throwable">is_throwable (ent)</a></td>
+	<td class="name" nowrap><a href="#utils.entity.is_throwable">utils.entity.is_throwable (ent)</a></td>
 	<td class="summary">Check if a weapon is a throwable</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#get_max_speed">get_max_speed (ent, wpn)</a></td>
+	<td class="name" nowrap><a href="#utils.entity.get_max_speed">utils.entity.get_max_speed (ent, wpn)</a></td>
 	<td class="summary">Get maximum player speed</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#multicolored_text">multicolored_text (x, y, flags, centered, spacing, data)</a></td>
+	<td class="name" nowrap><a href="#utils.renderer.multicolored_text">utils.renderer.multicolored_text (x, y, flags, centered, spacing, data)</a></td>
 	<td class="summary">Renders a multicolored string</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#anim_speed">anim_speed (speed)</a></td>
+	<td class="name" nowrap><a href="#utils.renderer.anim">utils.renderer.anim (speed)</a></td>
 	<td class="summary">Animates from 0 to 1 to 0</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#table_visible">table_visible (table, visible)</a></td>
+	<td class="name" nowrap><a href="#utils.misc.table_visible">utils.misc.table_visible (table, visible)</a></td>
 	<td class="summary">Sets the visibility of all the elements in a table</td>
 	</tr>
 </table>
@@ -116,8 +116,8 @@
 
     <dl class="function">
     <dt>
-    <a name = "vectorize"></a>
-    <strong>vectorize (table)</strong>
+    <a name = "utils.misc.vectorize"></a>
+    <strong>utils.misc.vectorize (table)</strong>
     </dt>
     <dd>
     Converts a table to a vector
@@ -141,8 +141,8 @@
 
 </dd>
     <dt>
-    <a name = "eye_pos"></a>
-    <strong>eye_pos (ent)</strong>
+    <a name = "utils.entity.eye_pos"></a>
+    <strong>utils.entity.eye_pos (ent)</strong>
     </dt>
     <dd>
     Gets eye position
@@ -166,8 +166,8 @@
 
 </dd>
     <dt>
-    <a name = "extrapolate"></a>
-    <strong>extrapolate (ent, ticks)</strong>
+    <a name = "utils.entity.extrapolate"></a>
+    <strong>utils.entity.extrapolate (ent, ticks)</strong>
     </dt>
     <dd>
     Extrapolates player position
@@ -194,8 +194,8 @@
 
 </dd>
     <dt>
-    <a name = "ent_dist"></a>
-    <strong>ent_dist (ent1, ent2)</strong>
+    <a name = "utils.entity.ent_dist"></a>
+    <strong>utils.entity.ent_dist (ent1, ent2)</strong>
     </dt>
     <dd>
     Gets distance between two entities
@@ -222,8 +222,8 @@
 
 </dd>
     <dt>
-    <a name = "get_damage"></a>
-    <strong>get_damage (shooter, victim, hb, ticks)</strong>
+    <a name = "utils.entity.get_damage"></a>
+    <strong>utils.entity.get_damage (shooter, victim, hb, ticks)</strong>
     </dt>
     <dd>
     Gets predicted bullet damage
@@ -256,8 +256,8 @@
 
 </dd>
     <dt>
-    <a name = "is_crouching"></a>
-    <strong>is_crouching (ent)</strong>
+    <a name = "utils.entity.is_crouching"></a>
+    <strong>utils.entity.is_crouching (ent)</strong>
     </dt>
     <dd>
     Checks if an entity is crouching
@@ -281,8 +281,8 @@
 
 </dd>
     <dt>
-    <a name = "is_in_air"></a>
-    <strong>is_in_air (ent)</strong>
+    <a name = "utils.entity.is_in_air"></a>
+    <strong>utils.entity.is_in_air (ent)</strong>
     </dt>
     <dd>
     Check if an entity is in air
@@ -306,8 +306,8 @@
 
 </dd>
     <dt>
-    <a name = "get_velocity"></a>
-    <strong>get_velocity (ent)</strong>
+    <a name = "utils.entity.get_velocity"></a>
+    <strong>utils.entity.get_velocity (ent)</strong>
     </dt>
     <dd>
     Gets an entity's velocity
@@ -331,8 +331,8 @@
 
 </dd>
     <dt>
-    <a name = "get_pstate"></a>
-    <strong>get_pstate (ent)</strong>
+    <a name = "utils.entity.get_pstate"></a>
+    <strong>utils.entity.get_pstate (ent)</strong>
     </dt>
     <dd>
     Gets an entity's current movement state
@@ -356,8 +356,8 @@
 
 </dd>
     <dt>
-    <a name = "is_throwable"></a>
-    <strong>is_throwable (ent)</strong>
+    <a name = "utils.entity.is_throwable"></a>
+    <strong>utils.entity.is_throwable (ent)</strong>
     </dt>
     <dd>
     Check if a weapon is a throwable
@@ -381,8 +381,8 @@
 
 </dd>
     <dt>
-    <a name = "get_max_speed"></a>
-    <strong>get_max_speed (ent, wpn)</strong>
+    <a name = "utils.entity.get_max_speed"></a>
+    <strong>utils.entity.get_max_speed (ent, wpn)</strong>
     </dt>
     <dd>
     Get maximum player speed
@@ -409,8 +409,8 @@
 
 </dd>
     <dt>
-    <a name = "multicolored_text"></a>
-    <strong>multicolored_text (x, y, flags, centered, spacing, data)</strong>
+    <a name = "utils.renderer.multicolored_text"></a>
+    <strong>utils.renderer.multicolored_text (x, y, flags, centered, spacing, data)</strong>
     </dt>
     <dd>
     Renders a multicolored string
@@ -449,8 +449,8 @@
 
 </dd>
     <dt>
-    <a name = "anim_speed"></a>
-    <strong>anim_speed (speed)</strong>
+    <a name = "utils.renderer.anim"></a>
+    <strong>utils.renderer.anim (speed)</strong>
     </dt>
     <dd>
     Animates from 0 to 1 to 0
@@ -474,8 +474,8 @@
 
 </dd>
     <dt>
-    <a name = "table_visible"></a>
-    <strong>table_visible (table, visible)</strong>
+    <a name = "utils.misc.table_visible"></a>
+    <strong>utils.misc.table_visible (table, visible)</strong>
     </dt>
     <dd>
     Sets the visibility of all the elements in a table
@@ -508,7 +508,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2022-02-09 07:48:06 </i>
+<i style="float:right;">Last updated 2022-02-10 18:03:53 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
