@@ -66,11 +66,11 @@ local THROWABLES = {
 
 -- Player state strings for get_pstate
 utils.enums.PLAYER_STATES = {
-    'stand',
-    'crouch',
-    'slow',
-    'air',
-    'move',
+    ['Stand'] = 'stand',
+    ['Crouch'] = 'crouch',
+    ['Slow'] = 'slow',
+    ['Air'] = 'air',
+    ['Move'] = 'move',
 }
 
 utils.enums.HITBOX = {
@@ -145,17 +145,23 @@ end
 ---@param ticks number
 ---@return number
 utils.entity.get_damage = function (shooter, victim, hb, ticks)
-    local eye_pos = utils.entity.eye_pos(ent1)
+    local eye_pos = utils.entity.eye_pos(shooter)
 
     if ticks then
-        eye_pos = utils.entity.extrapolate(ent1, ticks)
+        eye_pos = utils.entity.extrapolate(shooter, ticks)
     end
 
-    local hitbox_pos = utils.misc.vectorize({ entity.hitbox_position(ent2, hb) })
+    local hitbox_pos = utils.misc.vectorize({ entity.hitbox_position(victim, hb) })
 
-    local _, damage = client.trace_bullet(ent1, eye_pos.x, eye_pos.y, eye_pos.z, hitbox_pos.x, hitbox_pos.y, hitbox_pos.z)
+    local _, damage = client.trace_bullet(shooter, eye_pos.x, eye_pos.y, eye_pos.z, hitbox_pos.x, hitbox_pos.y, hitbox_pos.z)
 
     return damage
+end
+
+utils.entity.get_wpn_name = function (ent)
+    local wpn_obj = csgo_weapons(entity.get_player_weapon(ent))
+
+    return wpn_obj.name
 end
 
 ---Checks if an entity is crouching
@@ -193,42 +199,35 @@ utils.entity.get_pstate = function (ent)
 
     local state = 'stand'
 
+    local sw_active = ui.get(ref.antiaim_other.slow_motion[2])
+
     if utils.entity.is_crouching(ent) then
-        state = 'crouch'
+        state = utils.enums.PLAYER_STATES.Crouch
     elseif utils.entity.is_in_air(ent) then
-        state = 'air'
-    elseif velocity > 0.1 then
-        state = 'move'
-    elseif (ui.get(ref.antiaim_other.slow_motion[1]) and ui.get(ref.antiaim_other.slow_motion[2])) then
-        state = 'slow'
+        state = utils.enums.PLAYER_STATES.Air
+    elseif sw_active then
+        state = utils.enums.PLAYER_STATES.Slow
+    elseif velocity > 3 then
+        state = utils.enums.PLAYER_STATES.Move
     else
-        state = 'stand'
+        state = utils.enums.PLAYER_STATES.Stand
     end
+
+    return state
 end
 
-utils.misc.table_values = function (t)
+---@param t table
+---@param col string
+utils.misc.table_col = function (t, col)
     local values = {}
 
     for k, v in pairs(t) do
-        if type(v) == 'table' then
-            for i, v2 in pairs(v) do
-                table.insert(values, v2)
-            end
-        else
-            table.insert(values, v)
-        end
+        table.insert(values, col == 'k' and k or v)
     end
 
     return values
 end
 
---[[
-    'stand',
-    'crouch',
-    'slow',
-    'air',
-    'move',
-]]--
 
 ---Check if a weapon is a throwable
 ---@param ent number
@@ -237,6 +236,10 @@ utils.entity.is_throwable = function (ent)
     local classname = entity.get_classname(ent)
 
     return utils.misc.contains(THROWABLES, classname)
+end
+
+utils.entity.sanitize = function (ent)
+    return entity.is_alive(ent) and not entity.is_dormant(ent)
 end
 
 ---Get maximum player speed
@@ -308,6 +311,7 @@ end
 ---Sets the visibility of all the elements in a table
 ---@param table table
 ---@param visible boolean
+---@param include_children boolean
 ---@return void
 utils.misc.table_visible = function (table, visible, include_children)
     for k, v in pairs(table) do
@@ -316,6 +320,16 @@ utils.misc.table_visible = function (table, visible, include_children)
         elseif type(v) ~= 'table' then
             ui.set_visible(v, visible)
         end
+    end
+end
+
+utils.misc.normalize_angle = function (angle)
+    if angle > 180 then
+        return angle - 360
+    elseif angle < -180 then
+        return angle + 360
+    else
+        return angle
     end
 end
 
