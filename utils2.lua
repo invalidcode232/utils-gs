@@ -50,7 +50,6 @@ end
 
 utils.misc.dependency('gamesense/csgo_weapons', 'gamesense/csgo_weapons not found, please subscribe at https://gamesense.pub/forums/viewtopic.php?id=18807')
 utils.misc.dependency('ref_lib', 'ref_lib not found, downloading now.. (This might take a while)', 'https://raw.githubusercontent.com/invalidcode232/gamesense-lua/main/gamesense/ref_lib.lua')
-
 local csgo_weapons = require('gamesense/csgo_weapons')
 local ref = require('ref_lib')
 
@@ -158,10 +157,25 @@ utils.entity.get_damage = function (shooter, victim, hb, ticks)
     return damage
 end
 
+---@param ent number
+---@return string
 utils.entity.get_wpn_name = function (ent)
     local wpn_obj = csgo_weapons(entity.get_player_weapon(ent))
 
     return wpn_obj.name
+end
+
+---@param ent1 number
+---@param ent2 number
+---@return boolean
+utils.entity.is_visible = function (ent)
+    local me = entity.get_local_player()
+    local me_pos = utils.misc.vectorize({ entity.get_origin(me) })
+    local ent_pos = utils.misc.vectorize({ entity.hitbox_position(ent, utils.enums.HITBOX.Head) })
+
+    local frac = client.trace_line(me, me_pos.x, me_pos.y, me_pos.z, ent_pos.x, ent_pos.y, ent_pos.z)
+
+    return frac > 0.6
 end
 
 ---Checks if an entity is crouching
