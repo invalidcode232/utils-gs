@@ -44,12 +44,16 @@
 <div id="content">
 
 <h1>Module <code>utils2</code></h1>
-<p>Checks if a value is in a table</p>
+<p>Checks if a dependency is installed</p>
 <p></p>
 
 
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#utils.misc.contains">utils.misc.contains (t, index)</a></td>
+	<td class="summary">Checks if a value is in a table</td>
+	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#utils.misc.vectorize">utils.misc.vectorize (table)</a></td>
 	<td class="summary">Converts a table to a vector</td>
@@ -71,6 +75,14 @@
 	<td class="summary">Gets predicted bullet damage</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#utils.entity.get_wpn_name">utils.entity.get_wpn_name (ent)</a></td>
+	<td class="summary"></td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#utils.entity.is_visible">utils.entity.is_visible (ent1, ent2)</a></td>
+	<td class="summary">Checks if entity is visible by local player</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#utils.entity.is_crouching">utils.entity.is_crouching (ent)</a></td>
 	<td class="summary">Checks if an entity is crouching</td>
 	</tr>
@@ -85,6 +97,10 @@
 	<tr>
 	<td class="name" nowrap><a href="#utils.entity.get_pstate">utils.entity.get_pstate (ent)</a></td>
 	<td class="summary">Gets an entity's current movement state</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#utils.misc.table_col">utils.misc.table_col (t, col)</a></td>
+	<td class="summary">Gets the key/value of a table</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#utils.entity.is_throwable">utils.entity.is_throwable (ent)</a></td>
@@ -103,8 +119,12 @@
 	<td class="summary">Animates from 0 to 1 to 0</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#utils.misc.table_visible">utils.misc.table_visible (table, visible)</a></td>
+	<td class="name" nowrap><a href="#utils.misc.table_visible">utils.misc.table_visible (table, visible, include_children)</a></td>
 	<td class="summary">Sets the visibility of all the elements in a table</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#utils.misc.normalize_angle">utils.misc.normalize_angle (angle)</a></td>
+	<td class="summary">Normalizes angle</td>
 	</tr>
 </table>
 
@@ -115,6 +135,34 @@
     <h2 class="section-header "><a name="Functions"></a>Functions</h2>
 
     <dl class="function">
+    <dt>
+    <a name = "utils.misc.contains"></a>
+    <strong>utils.misc.contains (t, index)</strong>
+    </dt>
+    <dd>
+    Checks if a value is in a table
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+         void
+        </li>
+        <li><span class="parameter">index</span>
+         number
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean, number
+    </ol>
+
+
+
+
+</dd>
     <dt>
     <a name = "utils.misc.vectorize"></a>
     <strong>utils.misc.vectorize (table)</strong>
@@ -256,6 +304,59 @@
 
 </dd>
     <dt>
+    <a name = "utils.entity.get_wpn_name"></a>
+    <strong>utils.entity.get_wpn_name (ent)</strong>
+    </dt>
+    <dd>
+
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">ent</span>
+         number
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        string
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "utils.entity.is_visible"></a>
+    <strong>utils.entity.is_visible (ent1, ent2)</strong>
+    </dt>
+    <dd>
+    Checks if entity is visible by local player
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">ent1</span>
+         number
+        </li>
+        <li><span class="parameter">ent2</span>
+         number
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean
+    </ol>
+
+
+
+
+</dd>
+    <dt>
     <a name = "utils.entity.is_crouching"></a>
     <strong>utils.entity.is_crouching (ent)</strong>
     </dt>
@@ -350,6 +451,29 @@
 
         string
     </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "utils.misc.table_col"></a>
+    <strong>utils.misc.table_col (t, col)</strong>
+    </dt>
+    <dd>
+    Gets the key/value of a table
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+         table
+        </li>
+        <li><span class="parameter">col</span>
+         string
+        </li>
+    </ul>
+
 
 
 
@@ -475,7 +599,7 @@
 </dd>
     <dt>
     <a name = "utils.misc.table_visible"></a>
-    <strong>utils.misc.table_visible (table, visible)</strong>
+    <strong>utils.misc.table_visible (table, visible, include_children)</strong>
     </dt>
     <dd>
     Sets the visibility of all the elements in a table
@@ -487,6 +611,9 @@
          table
         </li>
         <li><span class="parameter">visible</span>
+         boolean
+        </li>
+        <li><span class="parameter">include_children</span>
          boolean
         </li>
     </ul>
@@ -501,6 +628,26 @@
 
 
 </dd>
+    <dt>
+    <a name = "utils.misc.normalize_angle"></a>
+    <strong>utils.misc.normalize_angle (angle)</strong>
+    </dt>
+    <dd>
+    Normalizes angle
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">angle</span>
+         number
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
 </dl>
 
 
@@ -508,7 +655,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2022-02-10 18:03:53 </i>
+<i style="float:right;">Last updated 2022-02-14 08:30:09 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

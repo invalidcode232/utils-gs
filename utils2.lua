@@ -165,6 +165,7 @@ utils.entity.get_wpn_name = function (ent)
     return wpn_obj.name
 end
 
+---Checks if entity is visible by local player
 ---@param ent1 number
 ---@param ent2 number
 ---@return boolean
@@ -230,6 +231,7 @@ utils.entity.get_pstate = function (ent)
     return state
 end
 
+---Gets the key/value of a table
 ---@param t table
 ---@param col string
 utils.misc.table_col = function (t, col)
@@ -337,6 +339,8 @@ utils.misc.table_visible = function (table, visible, include_children)
     end
 end
 
+---Normalizes angle
+---@param angle number
 utils.misc.normalize_angle = function (angle)
     if angle > 180 then
         return angle - 360
