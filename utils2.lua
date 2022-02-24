@@ -115,15 +115,15 @@ end
 ---@param ent number
 ---@param ticks number
 ---@return Vector
-utils.entity.extrapolate = function (ent, ticks)
-    local m_vecVelocity = utils.misc.vectorize({ entity.get_prop(ent, 'm_vecVelocity') })
-    local extrapolated_pos = m_vecVelocity
-
+utils.entity.extrapolate = function (xpos, ypos, zpos, ticks, ent)
+    local x, y, z = entity.get_prop(ent, 'm_vecVelocity')
     for i = 0, ticks do
-        extrapolated_pos = extrapolated_pos + (m_vecVelocity * globals.tickinterval())
+        xpos = xpos + (x * globals.tickinterval())
+        ypos = ypos + (y * globals.tickinterval())
+        zpos = zpos + (z * globals.tickinterval())
     end
 
-    return extrapolated_pos
+    return vector(xpos, ypos, zpos)
 end
 
 ---Gets distance between two entities
@@ -145,12 +145,12 @@ end
 ---@return number
 utils.entity.get_damage = function (shooter, victim, hb, ticks)
     local eye_pos = utils.entity.eye_pos(shooter)
+    local hitbox_pos = utils.misc.vectorize({ entity.hitbox_position(victim, hb) })
 
     if ticks then
-        eye_pos = utils.entity.extrapolate(shooter, ticks)
+        eye_pos = utils.entity.extrapolate(eye_pos.x, eye_pos.y, eye_pos.z, ticks, shooter)
+        hitbox_pos = utils.entity.extrapolate(hitbox_pos.x, hitbox_pos.y, hitbox_pos.z, ticks, victim)
     end
-
-    local hitbox_pos = utils.misc.vectorize({ entity.hitbox_position(victim, hb) })
 
     local _, damage = client.trace_bullet(shooter, eye_pos.x, eye_pos.y, eye_pos.z, hitbox_pos.x, hitbox_pos.y, hitbox_pos.z)
 
